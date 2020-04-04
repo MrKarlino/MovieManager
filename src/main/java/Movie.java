@@ -6,4 +6,11 @@ public class Movie {
     private int coverIconId;
     private String name;
 
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
 }

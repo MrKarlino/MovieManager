@@ -1,24 +1,22 @@
 public class MovieManager {
     private int numberOfMoviesToGet = 10;
-    private Movie[] movies = new Movie[0];
+    private MovieRepository repository;
 
-    public MovieManager() {}
+    public MovieManager() {
+        this.repository = new MovieRepository();
+    }
 
-    public MovieManager(int numberOfMoviesToGet) {
+    public MovieManager(MovieRepository repository, int numberOfMoviesToGet) {
+        this.repository = repository;
         this.numberOfMoviesToGet = numberOfMoviesToGet;
     }
 
     public void addMovie(Movie movie) {
-
-        Movie[] newMovies = new Movie[movies.length + 1];
-        for (int i = 0; i < movies.length; i++) {
-            newMovies[i] = movies[i];
-        }
-        newMovies[newMovies.length - 1] = movie;
-        movies = newMovies;
+        repository.save(movie);
     }
 
     public Movie[] getMovies() {
+        Movie[] movies = repository.findAll();
         int count = Math.min(numberOfMoviesToGet, movies.length);
         Movie[] result = new Movie[count];
         int displace = movies.length - result.length;
@@ -36,11 +34,23 @@ public class MovieManager {
 
     }
 
-    protected int getMovieCount() {
-        return movies.length;
+    public void removeById(int movieId) {
+        repository.removeById(movieId);
     }
 
-    protected void setMovies(Movie[] movies) {
-        this.movies = movies;
+    public Movie[] findAll() {
+        return repository.findAll();
+    }
+
+    public Movie findById(int movieId) {
+        return repository.findById(movieId);
+    }
+
+    public void removeAll() {
+        repository.removeAll();
+    }
+
+    protected void setNumberOfMoviesToGet(int numberOfMoviesToGet) {
+        this.numberOfMoviesToGet = numberOfMoviesToGet;
     }
 }
