@@ -20,7 +20,9 @@ class MovieManagerTest {
         MovieManager manager = new MovieManager();
 
         Movie[] moviesToAdd = { new Movie(),  new Movie() };
-        manager.setMovies(moviesToAdd);
+        for (var movie:moviesToAdd) {
+            manager.addMovie(movie);
+        }
         int expected = moviesToAdd.length;
         int actual = manager.getMovies().length;
         assertEquals(expected, actual);
@@ -33,7 +35,9 @@ class MovieManagerTest {
         MovieManager manager = new MovieManager(numberOfMoviesToGet);
 
         Movie[] moviesToAdd = { new Movie(),  new Movie(), new Movie(), new Movie(), new Movie()};
-        manager.setMovies(moviesToAdd);
+        for (var movie:moviesToAdd) {
+            manager.addMovie(movie);
+        }
         int expected = numberOfMoviesToGet;
         int actual = manager.getMovies().length;
         assertEquals(expected, actual);
@@ -45,7 +49,9 @@ class MovieManagerTest {
         MovieManager manager = new MovieManager();
 
         Movie[] moviesToAdd = { new Movie(),  new Movie(), new Movie(), new Movie(), new Movie()};
-        manager.setMovies(moviesToAdd);
+        for (var movie:moviesToAdd) {
+            manager.addMovie(movie);
+        }
         Movie lastMovie = new Movie();
         manager.addMovie(lastMovie);
         Movie[] lastMovies = manager.getMovies();

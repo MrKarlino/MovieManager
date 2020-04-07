@@ -39,8 +39,4 @@ public class MovieManager {
     protected int getMovieCount() {
         return movies.length;
     }
-
-    protected void setMovies(Movie[] movies) {
-        this.movies = movies;
-    }
 }
