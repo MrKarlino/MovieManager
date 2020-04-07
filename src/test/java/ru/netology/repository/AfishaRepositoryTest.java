@@ -1,27 +1,29 @@
+package ru.netology.repository;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.MalformedParameterizedTypeException;
+import ru.netology.domain.Movie;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MovieRepositoryTest {
+class AfishaRepositoryTest {
 
-    private MovieRepository repository;
-    private Movie movie1 = new Movie();
-    private Movie movie2 = new Movie();
+    private AfishaRepository repository;
+    private Movie movie1 = new Movie(1);
+    private Movie movie2 = new Movie(2);
     private Movie[] moviesToAdd = { movie1,  movie2 };
 
     @BeforeEach
     void setUp() {
-        repository = new MovieRepository();
+        repository = new AfishaRepository();
         repository.setMovies(moviesToAdd);
     }
 
     @Test
     void testFindAll() {
         Movie[] actual = repository.findAll();
-        assertArrayEquals(actual, moviesToAdd);
+        assertArrayEquals(moviesToAdd, actual);
     }
 
     @Test
@@ -30,13 +32,12 @@ class MovieRepositoryTest {
         repository.save(movie3);
         int actual = repository.findAll().length;
         int expected = moviesToAdd.length + 1;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
     void testFindById() {
         int movieId = 1;
-        movie1.setMovieId(movieId);
         Movie actual = repository.findById(movieId);
         Movie expected = movie1;
         assertEquals(expected, actual);
@@ -44,7 +45,7 @@ class MovieRepositoryTest {
 
     @Test
     void testFindByIdCrash() {
-        int movieId = 1;
+        int movieId = 3;
         Movie actual = repository.findById(movieId);
         Movie expected = null;
         assertEquals(expected, actual);
@@ -53,16 +54,15 @@ class MovieRepositoryTest {
     @Test
     void testRemoveById() {
         int movieId = 1;
-        movie1.setMovieId(movieId);
         repository.removeById(movieId);
         int expected = moviesToAdd.length - 1;
         int actual = repository.findAll().length;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
     void testRemoveAll() {
         repository.removeAll();
-        assertEquals(repository.findAll().length, 0);
+        Assertions.assertEquals(repository.findAll().length, 0);
     }
 }

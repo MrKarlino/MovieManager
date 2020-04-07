@@ -1,4 +1,8 @@
-public class MovieRepository {
+package ru.netology.repository;
+
+import ru.netology.domain.Movie;
+
+public class AfishaRepository {
     private Movie[] movies = new Movie[0];
 
     public Movie[] findAll() {
@@ -17,7 +21,7 @@ public class MovieRepository {
 
     public Movie findById(int movieId) {
         for (Movie i: movies) {
-            if (i.getMovieId() == movieId) {
+            if (i.getId() == movieId) {
                 return i;
             }
         }
@@ -29,7 +33,7 @@ public class MovieRepository {
         Movie[] tmp = new Movie[length];
         int index = 0;
         for (Movie i : movies) {
-            if (i.getMovieId() != movieId) {
+            if (i.getId() != movieId) {
                 tmp[index] = i;
                 index++;
             }
